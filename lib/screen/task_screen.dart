@@ -81,82 +81,111 @@ class _TaskScreenState extends State<TaskScreen> {
               Task task = box.getAt(index)!;
 
               return Card(
-                elevation: 4,
-                margin: const EdgeInsets.only(bottom: 15),
+                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 18),
 
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(15),
-
-                  leading: Checkbox(
-                    value: task.completed,
-                    onChanged: (value) {
-                      task.completed = value!;
-                      taskBox.putAt(index, task);
-                    },
-                  ),
-
-                  title: Text(
-                    task.title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      decoration: task.completed
-                          ? TextDecoration.lineThrough
-                          : null,
+                child: Stack(
+                  children: [
+                    // Priority Ribbon (STACK)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: priorityColor(task.priority),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          task.priority,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
 
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Category : ${task.category}"),
+                    Padding(
+                      padding: const EdgeInsets.all(18),
 
-                        const SizedBox(height: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Checkbox(
+                            value: task.completed,
+                            onChanged: (value) {
+                              task.completed = value!;
+                              taskBox.putAt(index, task);
+                            },
+                          ),
 
-                        Row(
-                          children: [
-                            const Text("Priority : "),
+                          const SizedBox(width: 10),
 
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ),
-
-                              decoration: BoxDecoration(
-                                color: priorityColor(task.priority),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-
-                              child: Text(
-                                task.priority,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  task.title,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: task.completed
+                                        ? TextDecoration.lineThrough
+                                        : null,
+                                  ),
                                 ),
-                              ),
+
+                                const SizedBox(height: 10),
+
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.category,
+                                      size: 18,
+                                      color: Colors.blue,
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(task.category),
+                                  ],
+                                ),
+
+                                const SizedBox(height: 8),
+
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.calendar_today,
+                                      size: 18,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      "${task.date.day}/${task.date.month}/${task.date.year}",
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
 
-                        const SizedBox(height: 5),
-
-                        Text(
-                          "Due : ${task.date.day}/${task.date.month}/${task.date.year}",
-                        ),
-                      ],
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              deleteTask(index);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-
-                    onPressed: () {
-                      deleteTask(index);
-                    },
-                  ),
+                  ],
                 ),
               );
             },

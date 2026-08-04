@@ -28,10 +28,27 @@ class ProfileScreen extends StatelessWidget {
 
         child: Column(
           children: [
-            const CircleAvatar(
-              radius: 55,
-              backgroundColor: Colors.deepPurple,
-              child: Icon(Icons.person, size: 60, color: Colors.white),
+            // STACK
+            Stack(
+              alignment: Alignment.bottomRight,
+
+              children: [
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.deepPurple,
+                  child: Icon(Icons.person, color: Colors.white, size: 65),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+
+                  child: const Icon(Icons.edit, color: Colors.white, size: 20),
+                ),
+              ],
             ),
 
             const SizedBox(height: 15),
@@ -41,6 +58,8 @@ class ProfileScreen extends StatelessWidget {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
 
+            const SizedBox(height: 5),
+
             const Text(
               "FocusFlow User",
               style: TextStyle(color: Colors.grey, fontSize: 16),
@@ -48,18 +67,22 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 30),
 
+            // ROW
             Row(
               children: [
                 Expanded(
                   child: Card(
+                    elevation: 5,
+
                     child: Padding(
                       padding: const EdgeInsets.all(20),
+
                       child: Column(
                         children: [
                           const Icon(
                             Icons.task_alt,
+                            size: 40,
                             color: Colors.blue,
-                            size: 35,
                           ),
 
                           const SizedBox(height: 10),
@@ -72,7 +95,12 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
 
-                          const Text("Tasks Completed"),
+                          const SizedBox(height: 5),
+
+                          const Text(
+                            "Tasks\nCompleted",
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),
@@ -83,14 +111,17 @@ class ProfileScreen extends StatelessWidget {
 
                 Expanded(
                   child: Card(
+                    elevation: 5,
+
                     child: Padding(
                       padding: const EdgeInsets.all(20),
+
                       child: Column(
                         children: [
                           const Icon(
                             Icons.track_changes,
+                            size: 40,
                             color: Colors.green,
-                            size: 35,
                           ),
 
                           const SizedBox(height: 10),
@@ -103,7 +134,12 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
 
-                          const Text("Habits Done"),
+                          const SizedBox(height: 5),
+
+                          const Text(
+                            "Habits\nCompleted",
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),
@@ -112,9 +148,11 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 25),
 
             Card(
+              elevation: 4,
+
               child: SwitchListTile(
                 title: const Text("Dark Mode", style: TextStyle(fontSize: 18)),
 
@@ -130,21 +168,28 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 15),
 
-            const Card(
+            Card(
+              elevation: 4,
+
               child: ListTile(
-                leading: Icon(Icons.info),
-                title: Text("About"),
-                subtitle: Text("FocusFlow Version 1.0"),
+                leading: const Icon(Icons.info),
+                title: const Text("Application"),
+                subtitle: const Text("FocusFlow Version 1.0"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 18),
               ),
             ),
 
             const SizedBox(height: 15),
 
-            const Card(
+            Card(
+              elevation: 4,
+
               child: ListTile(
-                leading: Icon(Icons.favorite, color: Colors.red),
-                title: Text("Stay Consistent"),
-                subtitle: Text("Small daily progress leads to big success."),
+                leading: const Icon(Icons.favorite, color: Colors.red),
+                title: const Text("Daily Motivation"),
+                subtitle: const Text(
+                  "Small daily progress leads to big success.",
+                ),
               ),
             ),
 

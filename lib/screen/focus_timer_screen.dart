@@ -80,68 +80,162 @@ class _FocusTimerScreenState extends State<FocusTimerScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Focus Timer"), centerTitle: true),
 
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(25),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(25),
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.self_improvement,
+                  size: 70,
+                  color: Colors.deepPurple,
+                ),
 
-            children: [
-              const Text(
-                "Pomodoro Timer",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
+                const SizedBox(height: 15),
 
-              const SizedBox(height: 40),
+                const Text(
+                  "Stay Focused",
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
 
-              SizedBox(
-                width: 220,
-                height: 220,
+                const SizedBox(height: 10),
 
-                child: Stack(
-                  alignment: Alignment.center,
+                const Text(
+                  "One session at a time.",
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                ),
+
+                const SizedBox(height: 30),
+
+                SizedBox(
+                  width: 240,
+                  height: 240,
+
+                  child: Stack(
+                    alignment: Alignment.center,
+
+                    children: [
+                      CircularProgressIndicator(
+                        value: progress,
+                        strokeWidth: 12,
+                      ),
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.timer,
+                            color: Colors.deepPurple,
+                            size: 45,
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          Text(
+                            timeString,
+                            style: const TextStyle(
+                              fontSize: 42,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          const SizedBox(height: 8),
+
+                          Text(
+                            isRunning ? "In Progress" : "Ready",
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 35),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                   children: [
-                    CircularProgressIndicator(value: progress, strokeWidth: 10),
+                    ElevatedButton.icon(
+                      onPressed: isRunning ? null : startTimer,
+                      icon: const Icon(Icons.play_arrow),
+                      label: const Text("Start"),
+                    ),
 
-                    Text(
-                      timeString,
-                      style: const TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    ElevatedButton.icon(
+                      onPressed: isRunning ? pauseTimer : null,
+                      icon: const Icon(Icons.pause),
+                      label: const Text("Pause"),
+                    ),
+
+                    ElevatedButton.icon(
+                      onPressed: resetTimer,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text("Reset"),
                     ),
                   ],
                 ),
-              ),
 
-              const SizedBox(height: 50),
+                const SizedBox(height: 30),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Card(
+                  elevation: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.all(18),
 
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: isRunning ? null : startTimer,
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text("Start"),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                      children: const [
+                        Column(
+                          children: [
+                            Icon(Icons.bolt, color: Colors.orange),
+                            SizedBox(height: 8),
+                            Text(
+                              "25 Min",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text("Focus"),
+                          ],
+                        ),
+
+                        Column(
+                          children: [
+                            Icon(Icons.free_breakfast, color: Colors.green),
+                            SizedBox(height: 8),
+                            Text(
+                              "5 Min",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text("Break"),
+                          ],
+                        ),
+
+                        Column(
+                          children: [
+                            Icon(Icons.repeat, color: Colors.blue),
+                            SizedBox(height: 8),
+                            Text(
+                              "4 Cycles",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text("Goal"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                ),
 
-                  ElevatedButton.icon(
-                    onPressed: isRunning ? pauseTimer : null,
-                    icon: const Icon(Icons.pause),
-                    label: const Text("Pause"),
-                  ),
-
-                  ElevatedButton.icon(
-                    onPressed: resetTimer,
-                    icon: const Icon(Icons.refresh),
-                    label: const Text("Reset"),
-                  ),
-                ],
-              ),
-            ],
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

@@ -59,34 +59,74 @@ class _HabitScreenState extends State<HabitScreen> {
 
           return Padding(
             padding: const EdgeInsets.all(20),
+
             child: Column(
               children: [
-                Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Today's Habit Progress",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                Stack(
+                  alignment: Alignment.topRight,
+
+                  children: [
+                    Card(
+                      elevation: 5,
+
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+
+                        child: Column(
+                          children: [
+                            const Icon(
+                              Icons.track_changes,
+                              size: 45,
+                              color: Colors.green,
+                            ),
+
+                            const SizedBox(height: 10),
+
+                            const Text(
+                              "Today's Habit Progress",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            LinearProgressIndicator(
+                              value: progress,
+                              minHeight: 12,
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            Text(
+                              "$completedHabits / ${box.length} Habits Completed",
+                              style: const TextStyle(fontSize: 17),
+                            ),
+                          ],
                         ),
-
-                        const SizedBox(height: 15),
-
-                        LinearProgressIndicator(value: progress, minHeight: 12),
-
-                        const SizedBox(height: 10),
-
-                        Text(
-                          "$completedHabits / ${box.length} Habits Completed",
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+
+                    Container(
+                      margin: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        "${(progress * 100).toInt()}%",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 20),
@@ -94,39 +134,73 @@ class _HabitScreenState extends State<HabitScreen> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: box.length,
+
                     itemBuilder: (context, index) {
                       Habit habit = box.getAt(index)!;
 
                       return Card(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CheckboxListTile(
+                        elevation: 4,
+                        margin: const EdgeInsets.only(bottom: 15),
+
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+
+                          child: Row(
+                            children: [
+                              Checkbox(
                                 value: habit.completed,
-
-                                title: Text(
-                                  habit.name,
-                                  style: TextStyle(
-                                    decoration: habit.completed
-                                        ? TextDecoration.lineThrough
-                                        : null,
-                                  ),
-                                ),
-
                                 onChanged: (value) {
                                   habit.completed = value!;
                                   habit.save();
                                 },
                               ),
-                            ),
 
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () {
-                                habit.delete();
-                              },
-                            ),
-                          ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                  children: [
+                                    Text(
+                                      habit.name,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: habit.completed
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 4),
+
+                                    Text(
+                                      habit.completed
+                                          ? "Completed Today"
+                                          : "Pending",
+                                      style: TextStyle(
+                                        color: habit.completed
+                                            ? Colors.green
+                                            : Colors.orange,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  habit.delete();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "FocusFlow 🚀",
+          "FocusFlow",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -23,7 +23,6 @@ class DashboardScreen extends StatelessWidget {
 
       body: ValueListenableBuilder(
         valueListenable: taskBox.listenable(),
-
         builder: (context, Box<Task> box, _) {
           int totalTasks = box.length;
 
@@ -38,50 +37,194 @@ class DashboardScreen extends StatelessWidget {
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
-                const Text(
-                  "Good Morning 👋",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
+                /// STACK DEMO
+                Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
 
-                const SizedBox(height: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
 
-                const Text(
-                  "Let's make today productive!",
-                  style: TextStyle(fontSize: 17, color: Colors.grey),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.deepPurple,
+                              size: 35,
+                            ),
+                          ),
+
+                          const SizedBox(width: 15),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Welcome Back!",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+
+                              Text(
+                                "Sakshi 👋",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Positioned(
+                      top: 15,
+                      right: 15,
+
+                      child: Stack(
+                        children: [
+                          const Icon(
+                            Icons.notifications,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+
+                          Positioned(
+                            right: 0,
+                            top: 0,
+
+                            child: Container(
+                              width: 10,
+                              height: 10,
+
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 25),
 
+                const Text(
+                  "Today's Progress",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 15),
+
                 Card(
                   elevation: 5,
+
                   child: Padding(
                     padding: const EdgeInsets.all(20),
 
                     child: Column(
                       children: [
-                        const Text(
-                          "Today's Progress",
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        LinearProgressIndicator(value: progress, minHeight: 12),
 
                         const SizedBox(height: 20),
 
-                        LinearProgressIndicator(value: progress, minHeight: 12),
-
-                        const SizedBox(height: 15),
-
                         Text(
                           "$completedTasks of $totalTasks Tasks Completed",
-                          style: const TextStyle(fontSize: 17),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
                   ),
+                ),
+
+                const SizedBox(height: 25),
+
+                /// ROW DEMO
+                Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        elevation: 5,
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(18),
+
+                          child: Column(
+                            children: [
+                              const Icon(
+                                Icons.task_alt,
+                                size: 40,
+                                color: Colors.blue,
+                              ),
+
+                              const SizedBox(height: 10),
+
+                              Text(
+                                "$totalTasks",
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const Text("Total Tasks"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 15),
+
+                    Expanded(
+                      child: Card(
+                        elevation: 5,
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(18),
+
+                          child: Column(
+                            children: [
+                              const Icon(
+                                Icons.check_circle,
+                                size: 40,
+                                color: Colors.green,
+                              ),
+
+                              const SizedBox(height: 10),
+
+                              Text(
+                                "$completedTasks",
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const Text("Completed"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 30),
@@ -111,6 +254,8 @@ class DashboardScreen extends StatelessWidget {
                         },
 
                         child: Card(
+                          elevation: 5,
+
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 25),
 
@@ -122,7 +267,7 @@ class DashboardScreen extends StatelessWidget {
                                   color: Colors.blue,
                                 ),
 
-                                SizedBox(height: 10),
+                                SizedBox(height: 12),
 
                                 Text(
                                   "Add Task",
@@ -152,6 +297,8 @@ class DashboardScreen extends StatelessWidget {
                         },
 
                         child: Card(
+                          elevation: 5,
+
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 25),
 
@@ -163,7 +310,7 @@ class DashboardScreen extends StatelessWidget {
                                   color: Colors.deepPurple,
                                 ),
 
-                                SizedBox(height: 10),
+                                SizedBox(height: 12),
 
                                 Text(
                                   "Focus Timer",
