@@ -12,12 +12,6 @@ A few resources to get you started if this is your first Flutter project:
 - [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# FocusFlow_Flutter
-FocusFlow is a Flutter productivity app designed to simplify task management, habit tracking, and focus sessions through an intuitive and responsive user interface.
 # FocusFlow
 
 FocusFlow is a productivity application built using Flutter that brings together task management, habit tracking, and focus sessions in one place. The goal of this project was to create a simple yet practical application that helps users organize their daily work, build consistent habits, and stay focused using the Pomodoro technique.

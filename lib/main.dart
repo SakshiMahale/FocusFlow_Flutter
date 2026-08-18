@@ -7,6 +7,7 @@ import 'models/habit.dart';
 
 import 'theme/theme_provider.dart';
 import 'screen/splash_screen.dart';
+import 'screen/experiment3_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +56,8 @@ class FocusFlowApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
 
-      home: const SplashScreen(),
+      //home: const SplashScreen(),
+      home: const Experiment3Screen(),
     );
   }
 }
