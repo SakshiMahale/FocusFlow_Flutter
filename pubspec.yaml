@@ -40,6 +40,8 @@ dependencies:
   path_provider: ^2.1.6
   hive_generator: ^2.0.1
   build_runner: ^2.4.13
+  google_maps_flutter: ^2.18.0
+  geolocator: ^14.0.3
 
 dev_dependencies:
   flutter_test:
